@@ -1,0 +1,78 @@
+run:
+  version: "solana-weighted"
+  number: 1
+  # simulated #block (the result of the first 50 blocks will be ignore)
+  # 1000 blocks with arrival rate 0.01 to cover the whole day.
+  numBlocks: 10
+network:
+  # Network topology: ["RANDOM_GRAPH", "GOSSIPSUB", "GRID", "BITCOIN", "ETHEREUM_CLASSIC", "SAMPLE"]
+  topology: "gossipsub"
+  # If using sample topology, the graph file path
+  sampleTopology: "Toposhot/ropsten_20201013_topology_anon"
+  # number of nodes
+  size: 500
+  # average degree of nodes
+  degree: 200
+  edges: 40
+  gossipsub:
+    # For metadata-only connections, the interval in second to gossip received
+    # messages and the number of selected peers to gossip the metadata
+    gossipHeartbeatIntervalMS: 1000
+    numGossipPeers: 12
+    # Probability of a node switch its activity after XX time
+  #  churnRate: 0.976
+
+  churnRate: 0
+  pPrivateNodes: 0
+  # Whether to simulate real network latency/bandwidth between regions (Pareto-
+  # distributed latency + bandwidth-based transmission delay) instead of a fixed
+  # round-based delay. Leave unset to keep the built-in default.
+  realLatency: true
+  # Proportion of super nodes that have double the connections as normal nodes
+  #supernodeRate: 0.1
+blockchain:
+  # Name of blockchain: ["BTC", "ETH", "MONERO", "CARDANO"]
+  # if use "RUMOR" then ignore this section and go to section "gossip"
+  type: "rumor"
+  # type of mining power distribution: [DEFAULT, DEFAULT_Z, ZERONODES, MININGPOOLS]
+  miningDist: "default"
+  useTransaction: false
+  # whether all blockchain use the fixed profile
+  fixedProfile: false
+  # should the mining tasks be filtered
+  filterMiningTask: false
+gossip:
+  # Message transmission model: ["PUSH", "ADVERTISEMENT", "HYBRID", "CHUNK", "GOSSIPSUB"]
+  model: "gossipsub"
+  # message size of each gossip rumor in byte
+  messageSize: 80000
+  # arrival rate of each rumor per second
+  arrivalRatePerSec: 0.1
+  # timeout for a node to disconnect from a neighbor that fails to send a
+  # message (600 second)
+  timeoutS: 600000
+  # If method is "CHUNK" then define the erasure code configuration
+  erasureCode:
+    # num data chunks
+    k: 10
+    # num coding chunks
+    m: 10
+  randomConnection: 8
+adversary:
+  # type of adversary strategy: [ "NONE", "RANDOM", "GREEDY", "WEIGHTED" ]
+  strategy: "none"
+  # whether the adversary has global knowledge of the network topology
+  globalKnowledge: true
+  # whether the adversary is adaptive or oblivious
+  adaptive: false
+  # type of centrality used to evaluate the importance of a node in the network: ["degree", "closeness", "betweenness", "eigen"]
+  nodeCentrality: "degree"
+  # Number of corrupted nodes in proportion [0, 1)
+  pFailedNodes: 0.3
+  # Number of corrupted links in proportion [0, 1)
+  pFailedLinks: 0
+  # Time it takes to corrupt one node and one link in second
+  corruptionDelayS: 0
+  # How should the corrupted node behave: ["crash", "nonresponding"]
+  corruptBehavior: "crash"
+  msgDropRate: 1
