@@ -1,6 +1,6 @@
 # Artifact for paper: “On the Robustness of Gossip Protocols in Modern Blockchains” (S&P ’27)
 
-This repository contains the source code and the evaluation data used in our paper “On the Robustness of Gossip Protocols in Modern Blockchains” - **accepted** at the 48th IEEE Symposium on Security and Privacy **(IEEE S&P ’26)**.
+This repository contains the source code and the evaluation data used in our paper “On the Robustness of Gossip Protocols in Modern Blockchains” - **accepted** at the 48th IEEE Symposium on Security and Privacy **(IEEE S&P ’27)**.
 
 The simulator is an extension of [SimBlock](https://ieeexplore.ieee.org/document/8845253), an event-driven simulator based on JAVA. Based on their work, we have further extended the simulator in the following aspects:
 - simulate different topologies, such as grid topology and tree topology;
